@@ -3,7 +3,7 @@
 # Returns a line number or string that tells us searched term doesn't appear on the file (int or string)
 # The offset is how much we want to add to the line number the function is returning,
 # as sometimes we want the line after the searched term
-def findLineNum(file_name, search_term, offset):
+def find_line_num(file_name, search_term, offset):
     line_number = "Term not found"
     with open(file_name, 'r') as saveFile:
         for number, line in enumerate(saveFile):
@@ -20,7 +20,7 @@ def findLineNum(file_name, search_term, offset):
 # Returns the text on a specific line of a file
 # Takes file name (string) and line number to read (int)
 # Returns text on the specific line (string)
-def readLine(file_name, line_num):
+def read_line(file_name, line_num):
     line_text = ""
     with open(file_name, 'r') as save_file:
         lines = save_file.readlines()
@@ -33,7 +33,7 @@ def readLine(file_name, line_num):
 # We use the below function to update the # of times the user has attempted a particular roll
 # Takes file name (string), line number to be overwritten (int), and new # of attempts (string)
 # Returns null
-def writeLine(file_name, line_num, write):
+def write_line(file_name, line_num, write):
     with open(file_name, 'r') as save_file:
         lines = save_file.readlines()
         lines[line_num] = write + "\n"

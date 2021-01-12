@@ -7,7 +7,7 @@ complement = True
 # Takes name of a mount (string), and the current number of attempts (int)
 # Returns a message (string)
 # Does not need to print, as it is simply being displayed in a messages box in tkinter
-def calculate(mount, tries):
+def probability_message(mount, tries):
     return "The chance of getting " + mount + " within " + str(tries) + " tries is " + str(probability(mount, tries))
 
 
@@ -16,8 +16,8 @@ def calculate(mount, tries):
 # Returns the drop rate of said mount (string)
 # As the drop rates are all decimal, cannot be converted to int, must be converted to float
 def get_probability(mount):
-    line_num = ReadWriter.findLineNum("Drop Rates.txt", mount, 1)
-    return ReadWriter.readLine("Drop Rates.txt", line_num)
+    line_num = ReadWriter.find_line_num("Drop Rates.txt", mount, 1)
+    return ReadWriter.read_line("Drop Rates.txt", line_num)
 
 
 # Returns the statistical probability of (not) getting the amount after the inputted attempts
