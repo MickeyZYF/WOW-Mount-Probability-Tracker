@@ -2,9 +2,6 @@ import tkinter
 import Core
 import ReadWriter
 
-# NOTE: Probably move some of the functions here into a file, as most of the stuff here are actually
-#       just helper functions. So separating the helpers and the actual tkinter stuff would makes things cleaner
-
 
 # Opens a new window with the given given and display the label as text
 # Takes the title of the window (string), and the text to be displayed (string)
@@ -13,7 +10,7 @@ import ReadWriter
 def open_new_window(window_title, window_label):
     # Toplevel object which will
     # be treated as a new window
-    new_window = tkinter.Toplevel(master)
+    new_window = tkinter.Toplevel()
 
     # sets the title of the
     # Toplevel widget
@@ -53,27 +50,3 @@ def open_and_save(window_title, mount, tries, complement):
     else:
         open_new_window(window_title, Core.probability_message(mount, tries))
     save_attempts(mount, tries)
-
-
-master = tkinter.Tk()
-master.title("WOW Statistical Probabily Tracker")
-
-
-# Code for the complement checkbox
-complement_checkbox = tkinter.BooleanVar()
-tkinter.Checkbutton(master, text = "Complement", variable = complement_checkbox).grid(column = 4, row = 1)
-
-
-# Below is the code that is generating the current tkinter window
-var = tkinter.StringVar()
-var.set(load_attempts("Invincible"))
-spin = tkinter.Spinbox(master, from_ = 0, to = 100, width = 10, textvariable = var)
-spin.grid(column = 1, row = 0)
-
-# spinbox.get() always return a string
-tkinter.Button(master,
-               text = "Click Me!",
-               command = lambda: open_and_save("Invincible", "Invincible", int(spin.get()), complement_checkbox.get())
-               ).grid(column = 2, row = 2)
-master.geometry('250x250')
-master.mainloop()

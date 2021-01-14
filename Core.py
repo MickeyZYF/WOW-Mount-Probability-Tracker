@@ -36,7 +36,7 @@ def get_probability(mount):
 # If complement is false, returns the probability of getting the mount
 def probability(mount, tries):
     prob = float(get_probability(mount))
-    z = (1 - prob) ** tries
+    z = 1 - ((1 - prob) ** tries)
     return z
 
 
@@ -49,4 +49,5 @@ def probability(mount, tries):
 def probability_complement(mount, tries):
     prob = float(get_probability(mount))
     z = 1 - ((1 - prob) ** tries)
+    z = (1 - prob) ** tries
     return z
