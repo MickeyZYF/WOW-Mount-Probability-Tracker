@@ -1,2 +1,6 @@
+Fiery Warhorse
+0.011
+Ashes of Al'ar
+0.017
 Invincible
 0.01

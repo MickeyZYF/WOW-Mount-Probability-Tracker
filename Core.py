@@ -1,5 +1,9 @@
 import ReadWriter
 
+# Note: Currently the probability is displayed as a decimal number rather than a percentage, also if the number of
+#       attempts is sufficiently high, then it would calculate as 1.00, or 100%. This is most likely due to how float
+#       works, should probably change it sometimes, have it be percentage with two decimal spaces and rounded down
+
 
 # Returns a message that states the statistical probability of getting the amount after the inputted attempts
 # Takes name of a mount (string), and the current number of attempts (int)
