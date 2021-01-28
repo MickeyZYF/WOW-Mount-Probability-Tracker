@@ -1,4 +1,4 @@
-import tkinter
+from tkinter import *
 import Core
 import ReadWriter
 
@@ -10,17 +10,14 @@ import ReadWriter
 def open_new_window(window_title, window_label):
     # Toplevel object which will
     # be treated as a new window
-    new_window = tkinter.Toplevel()
+    new_window = Toplevel()
 
     # sets the title of the
     # Toplevel widget
     new_window.title(window_title)
 
-    # sets the geometry of the Toplevel
-    new_window.geometry("200x100")
-
     # A Label widget to show in Toplevel
-    tkinter.Label(new_window, text = window_label).pack()
+    Label(new_window, text = window_label).pack()
 
 
 # Writes the current number of attempts for a particular mount into a save file
@@ -41,7 +38,7 @@ def load_attempts(mount):
 
 # Essentially just calls two other functions at once, one to open new text window, other to save data to txt file
 # Takes the title of the window (string), the name of the mount (string), the number of attempts tried (int),
-#                                         and complement (boolean)
+# and complement (boolean)
 # Returns null
 # The variable complement is controlled by a tkinter checkbox, and changes what value is printed depending on its value
 def open_and_save(window_title, mount, tries, complement):
@@ -50,3 +47,52 @@ def open_and_save(window_title, mount, tries, complement):
     else:
         open_new_window(window_title, Core.probability_message(mount, tries))
     save_attempts(mount, tries)
+
+
+# Generates a frame that also contains all the necessary widgets for all mounts in a list
+# Takes the parent window the frame will be part of (TK()),
+# the row (int) and column (int) the new frame will be located on the parent window,
+# the name of the frame we're creating (string),
+# and a list of all the mounts to go into the frame (list of string),
+# the complement_checkbox (tkinter.CheckButton())
+# Returns null
+def generate_widgets(master, master_row, master_column, frame_name, mount_list, complement_checkbox):
+    new_frame = LabelFrame(master, text = frame_name, font=("Arial Narrow", 18), padx = 5, pady = 5)
+    new_frame.grid(row = master_row, column = master_column, padx = 10, pady = 10, sticky = N + S + E + W)
+
+    # We have row weight be equal to the number of mounts per frame
+    master.rowconfigure(master_row, weight = len(mount_list))
+    master.columnconfigure(master_column, weight = 1)
+
+    label_widgets = {}
+    attempts_string = {}
+    spin_widgets = {}
+    button_widgets = {}
+    for i in range(len(mount_list)):
+
+        full_name = mount_list[i]
+        mount_name = full_name.split(' - ')[1]
+
+        label_widgets[i] = Label(new_frame, text = mount_list[i], font = ("Arial Narrow", 12))
+        label_widgets[i].grid(row = i, column = 0, sticky = W)
+
+        attempts_string[i] = StringVar()
+        attempts_string[i].set(load_attempts(mount_name))
+
+        spin_widgets[i] = Spinbox(new_frame, from_ = 0, to = 255, width = 5, textvariable = attempts_string[i])
+        spin_widgets[i].grid(row = i, column = 1, sticky = E)
+
+        button_widgets[i] = Button(new_frame,
+                                   text = "Calculate",
+                                   command = lambda: open_and_save(full_name,
+                                                                   mount_name,
+                                                                   int(spin_widgets[i].get()),
+                                                                   complement_checkbox.get()))
+        button_widgets[i].grid(row = i, column = 2, sticky = E)
+
+        new_frame.rowconfigure(i, weight = 1)
+
+    # Column 0 is label, column 1 is spinbox, column 2 is button
+    new_frame.columnconfigure(0, weight = 1)
+    new_frame.columnconfigure(1, weight = 1)
+    new_frame.columnconfigure(2, weight = 1)

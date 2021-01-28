@@ -1,6 +1,28 @@
 Fiery Warhorse
-0.011
+0.01
 Ashes of Al'ar
-0.017
+0.02
+Grand Black War Mammoth
+0.01
+Azure Drake
+0.05
+Blue Drake
+0.05
+Onyxian Drake
+0.01
+Mimiron's Head
+0.01
 Invincible
+0.01
+Drake of the South Wind
+0.01
+Flametalon of Alysrazor
+0.02
+Pureblood Fire Hawk
+0.01
+Experiment 12-B
+0.01
+Blazing Drake
+0.03
+Life-Binder's Handmaiden
 0.01
