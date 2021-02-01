@@ -26,3 +26,29 @@ Blazing Drake
 0.03
 Life-Binder's Handmaiden
 0.01
+Astral Cloud Serpent
+0.01
+Spawn of Horridon
+0.01
+Clutch of Ji-Kun
+0.01
+Kor'kron Juggernaut
+0.01
+Ironhoof Destroyer
+0.01
+Felsteel Annihilator
+0.01
+Living Infernal Core
+0.01
+Fiendish Hellfire Core
+0.01
+Abyss Worm
+0.01
+Antoran Charhound
+0.01
+Shackled Ur'zul
+0.01
+G.M.O.D.
+0.01
+Glacial Tidestorm
+0.01

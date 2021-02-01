@@ -1,8 +1,12 @@
+from decimal import *
 import ReadWriter
 
 # Note: Currently the probability is displayed as a decimal number rather than a percentage, also if the number of
 #       attempts is sufficiently high, then it would calculate as 1.00, or 100%. This is most likely due to how float
 #       works, should probably change it sometimes, have it be percentage with two decimal spaces and rounded down
+
+
+
 
 
 # Returns a message that states the statistical probability of getting the amount after the inputted attempts
@@ -11,7 +15,7 @@ import ReadWriter
 # Does not need to print, as it is simply being displayed in a messages box in tkinter
 def probability_message(mount, tries):
     return "The chance of getting " + mount + " within " + str(tries) + " tries is " \
-            + str(probability(mount, tries))
+            + str(probability(mount, tries)) + "%"
 
 
 # Returns a message that states the statistical probability of NOT getting the amount after the inputted attempts
@@ -20,7 +24,7 @@ def probability_message(mount, tries):
 # Does not need to print, as it is simply being displayed in a messages box in tkinter
 def probability_message_complement(mount, tries):
     return "The chance of getting not " + mount + " within " + str(tries) + " tries is " \
-            + str(probability_complement(mount, tries))
+            + str(probability_complement(mount, tries)) + "%"
 
 
 # Returns the drop rate of a mount dropping by parsing through the txt file that stores this info
@@ -39,8 +43,10 @@ def get_probability(mount):
 # If complement is true, returns the probability of not getting the mount
 # If complement is false, returns the probability of getting the mount
 def probability(mount, tries):
-    prob = float(get_probability(mount))
-    z = 1 - ((1 - prob) ** tries)
+    getcontext().prec = 4
+    getcontext().rounding = ROUND_DOWN
+    prob = Decimal(get_probability(mount))
+    z = (1 - ((1 - prob) ** tries)) * 100
     return z
 
 
@@ -51,7 +57,8 @@ def probability(mount, tries):
 # If complement is true, returns the probability of not getting the mount
 # If complement is false, returns the probability of getting the mount
 def probability_complement(mount, tries):
-    prob = float(get_probability(mount))
-    z = 1 - ((1 - prob) ** tries)
-    z = (1 - prob) ** tries
+    getcontext().prec = 4
+    getcontext().rounding = ROUND_UP
+    prob = Decimal(get_probability(mount))
+    z = ((1 - prob) ** tries) * 100
     return z

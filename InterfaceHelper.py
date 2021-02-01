@@ -55,14 +55,14 @@ def open_and_save(window_title, mount, tries, complement):
 # the name of the frame we're creating (string),
 # and a list of all the mounts to go into the frame (list of string),
 # the complement_checkbox (tkinter.CheckButton())
-# Returns null
-def generate_widgets(master, master_row, master_column, frame_name, mount_list, complement_checkbox):
+# Returns (tkinter.LabelFrame)
+def generate_widgets(master, frame_name, mount_list, complement_checkbox):
     new_frame = LabelFrame(master, text = frame_name, font=("Arial Narrow", 18), padx = 5, pady = 5)
-    new_frame.grid(row = master_row, column = master_column, padx = 10, pady = 10, sticky = N + S + E + W)
+    new_frame.grid(row = 0, column = 0, padx = 10, pady = 10, sticky = N + S + E + W)
 
     # We have row weight be equal to the number of mounts per frame
-    master.rowconfigure(master_row, weight = len(mount_list))
-    master.columnconfigure(master_column, weight = 1)
+    master.rowconfigure(0, weight = len(mount_list))
+    master.columnconfigure(0, weight = 1)
 
     label_widgets = {}
     attempts_string = {}
@@ -84,10 +84,13 @@ def generate_widgets(master, master_row, master_column, frame_name, mount_list, 
 
         button_widgets[i] = Button(new_frame,
                                    text = "Calculate",
-                                   command = lambda: open_and_save(full_name,
-                                                                   mount_name,
-                                                                   int(spin_widgets[i].get()),
-                                                                   complement_checkbox.get()))
+                                   # j = i saves the current value of i into j when lambda is defined,
+                                   # if we don't have this line, the command will always use the value of i when the
+                                   # command is called, which will be the last row (i-th)
+                                   command = lambda j = i: open_and_save(mount_list[j],
+                                                                         mount_list[j].split(' - ')[1],
+                                                                         int(spin_widgets[j].get()),
+                                                                         complement_checkbox.get()))
         button_widgets[i].grid(row = i, column = 2, sticky = E)
 
         new_frame.rowconfigure(i, weight = 1)
@@ -96,3 +99,5 @@ def generate_widgets(master, master_row, master_column, frame_name, mount_list, 
     new_frame.columnconfigure(0, weight = 1)
     new_frame.columnconfigure(1, weight = 1)
     new_frame.columnconfigure(2, weight = 1)
+
+    return new_frame
