@@ -41,4 +41,3 @@ def write_line(file_name, line_num, write):
             out.writelines(lines)
             out.close()
     save_file.close()
-

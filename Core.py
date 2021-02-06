@@ -1,20 +1,13 @@
 from decimal import *
 import ReadWriter
 
-# Note: Currently the probability is displayed as a decimal number rather than a percentage, also if the number of
-#       attempts is sufficiently high, then it would calculate as 1.00, or 100%. This is most likely due to how float
-#       works, should probably change it sometimes, have it be percentage with two decimal spaces and rounded down
-
-
-
-
 
 # Returns a message that states the statistical probability of getting the amount after the inputted attempts
 # Takes name of a mount (string), and the current number of attempts (int)
 # Returns a message (string)
 # Does not need to print, as it is simply being displayed in a messages box in tkinter
 def probability_message(mount, tries):
-    return "The chance of getting " + mount + " within " + str(tries) + " tries is " \
+    return "The chance of getting " + mount + " within " + str(tries) + " tries is ~" \
             + str(probability(mount, tries)) + "%"
 
 
@@ -32,8 +25,8 @@ def probability_message_complement(mount, tries):
 # Returns the drop rate of said mount (string)
 # As the drop rates are all decimal, cannot be converted to int, must be converted to float
 def get_probability(mount):
-    line_num = ReadWriter.find_line_num("Drop Rates.txt", mount, 1)
-    return ReadWriter.read_line("Drop Rates.txt", line_num)
+    line_num = ReadWriter.find_line_num("Assets\\Drop Rates.txt", mount, 1)
+    return ReadWriter.read_line("Assets\\Drop Rates.txt", line_num)
 
 
 # Returns the statistical probability of getting the amount after the inputted attempts
